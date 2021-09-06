@@ -1,0 +1,12 @@
+server:
+  servlet:
+    context-path: /wechat
+  port: 10002
+
+spring:
+  profiles:
+    active: dev
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: io.github.ljun51.wechat.model

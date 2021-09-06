@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.github.ljun51.system.mapper.UserMapper">
+
+    <sql id="Base_Column">
+    id, username, password, nickname, avatar, status, createDate, updateDate
+  </sql>
+
+    <select id="selectList" resultType="User" parameterType="User">
+        select
+        <include refid="Base_Column"/>
+        from user
+        <where>
+            <if test="username != null and username != ''">AND username = #{username}</if>
+            <if test="status != null">AND status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectOne" resultType="User" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column"/>
+        from user
+        <where>
+            <if test="id != null and id != ''">AND id = #{id}</if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="User">
+        insert into user (
+        <include refid="Base_Column"/>
+        )
+        values (#{id}, #{username}, #{password}, #{nickname}, #{avatar}, #{status}, #{createDate}, #{updateDate})
+    </insert>
+
+    <update id="update" parameterType="User">
+        update user
+        <set>
+            <if test="username != null">username = #{username},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateDate != null">updateDate = #{updateDate},</if>
+        </set>
+        <where>
+            <if test="id != null and id != ''">AND id = #{id}</if>
+        </where>
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from user
+        <where>
+            <if test="id != null and id != ''">AND id = #{id}</if>
+        </where>
+    </delete>
+</mapper>

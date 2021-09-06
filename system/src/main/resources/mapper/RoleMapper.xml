@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.github.ljun51.system.mapper.RoleMapper">
+
+    <sql id="Base_Column">
+    id, roleName, remark, status, createDate, updateDate
+  </sql>
+
+    <select id="selectList" resultType="Role" parameterType="Role">
+        select
+        <include refid="Base_Column"/>
+        from role
+        <where>
+            <if test="roleName != null and roleName != ''">AND roleName like concat('%', #{roleName}, '%')</if>
+            <if test="status != null">AND status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectOne" resultType="Role" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column"/>
+        from role
+        <where>
+            <if test="id != null and id != ''">AND id = #{id}</if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="Role">
+        insert into role (
+        <include refid="Base_Column"/>
+        )
+        values (#{id}, #{roleName}, #{remark}, #{status}, #{createDate}, #{updateDate})
+    </insert>
+
+    <update id="update" parameterType="Role">
+        update role
+        <set>
+            <if test="roleName != null">roleName = #{roleName},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateDate != null">updateDate = #{updateDate},</if>
+        </set>
+        <where>
+            <if test="id != null and id != ''">AND id = #{id}</if>
+        </where>
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from role
+        <where>
+            <if test="id != null and id != ''">AND id = #{id}</if>
+        </where>
+    </delete>
+</mapper>

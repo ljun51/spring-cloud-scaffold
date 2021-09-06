@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:4000/system?characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    platform: mysql
+    druid:
+      initial-size: 5
+      max-active: 200
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.github.ljun51.system.mapper.RoleMenuMapper">
+
+    <sql id="Base_Column">id, roleId, menuId</sql>
+
+    <select id="selectList" resultType="RoleMenu" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column"/>
+        from role_menu
+        <where>
+            <if test="roleId != null and roleId != ''">AND roleId = #{roleId}</if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="RoleMenu">
+        insert into role_menu (
+        <include refid="Base_Column"/>
+        )
+        values (#{id}, #{roleId}, #{menuId})
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from role_menu
+        <where>
+            <if test="roleId != null and roleId != ''">AND roleId = #{roleId}</if>
+            <if test="menuId != null and menuId != ''">AND menuId = #{menuId}</if>
+        </where>
+    </delete>
+</mapper>
