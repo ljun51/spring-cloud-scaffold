@@ -16,10 +16,10 @@ public class App {
     }
 
     @Bean
-    public RouteLocator myRoutes(RouteLocatorBuilder builder) {
+    public RouteLocator routes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(p -> p
-                        .path("/get")
+                        .path("/httpbin")
                         .filters(f -> f.addRequestHeader("Hello", "World"))
                         .uri("http://httpbin.org:80"))
                 .build();

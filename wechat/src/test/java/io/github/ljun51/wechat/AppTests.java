@@ -3,7 +3,7 @@ package io.github.ljun51.wechat;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class AppTests {
 
     @Test
